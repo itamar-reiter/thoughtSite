@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useHistory } from 'react'
+import React, { useEffect, useState} from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -6,7 +6,6 @@ import Footer from '../Footer/Footer';
 import MainApi from '../../utils/MainApi';
 
 function App() {
-  const history = useHistory();
 
   const [token, setToken] = useState();
 
@@ -36,7 +35,7 @@ function App() {
           console.log(err);
         });
     }
-  }, [token, history]);
+  }, [token]);
 
   useEffect(() => {
     if (token) {
@@ -52,8 +51,17 @@ function App() {
     }
   }, [token]);
 
+  const onChooseFriendsSubmit = () => {
+    
+  }
+
+  const chooseFriendsProps = {
+    onSubmit: onChooseFriendsSubmit
+  }
+
   const mainProps = {
-    friends: friends
+    friends: friends,
+    chooseFriendsProps,
   }
   return (
 

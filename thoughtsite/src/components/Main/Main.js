@@ -9,7 +9,8 @@ function Main({ mainProps }) {
   return (
     <main className='main'>
       {mainProps.freinds = [] ?
-        <ChooseFriends />
+        <ChooseFriends
+        chooseFriendsProps={mainProps.chooseFriendsProps} />
         : <>
           <Settings />
           <Feed />
