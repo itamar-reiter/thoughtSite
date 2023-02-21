@@ -1,8 +1,21 @@
-import React from 'react'
+import React from 'react';
+import ChooseFriends from '../ChooseFriends/ChooseFriends';
+import Feed from '../Feed/Feed';
+import MoreInfo from '../MoreInfo/MoreInfo';
+import Settings from '../Settings/Settings';
+import './Main.css';
 
-function Main() {
+function Main({ mainProps }) {
   return (
-    <div>Main</div>
+    <main className='main'>
+      {mainProps.freinds = [] ?
+        <ChooseFriends />
+        : <>
+          <Settings />
+          <Feed />
+          <MoreInfo />
+        </>}
+    </main>
   )
 }
 
