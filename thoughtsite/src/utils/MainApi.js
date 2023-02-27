@@ -76,6 +76,44 @@ class MainApi {
       .then((res) => this._checkResponse(res));
   }
 
+  getUsers(token, name) {
+    return fetch(`${this._baseUrl}/users/${name}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => this._checkResponse(res));
+  }
+
+  joinWaitingRoom(token, friendId) {
+    return fetch(`${this._baseUrl}/users/${friendId}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    })
+      .then((res) => this._checkResponse(res));
+  }
+
+  handleFriendsList(token, friendId, method) {
+    return fetch(`${this._baseUrl}/users/me/friends`, {
+      method: method,
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: {
+        friendId,
+      }
+    })
+      .then((res) => this._checkResponse(res));
+  }
+
+
+
   getPosts(token) {
     return fetch(`${this._baseUrl}/posts`, {
       method: "GET",
@@ -89,7 +127,7 @@ class MainApi {
 
   savePost(data, token) {
     const {
-     keyword, title, text, date, source, link, image,
+      keyword, title, text, date, source, link, image,
     } = data;
     return fetch(`${this._baseUrl}/articles`, {
       method: "POST",

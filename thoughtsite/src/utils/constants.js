@@ -1,3 +1,3 @@
 export const apiData = {
-  baseUrl: "https://api.itamarreiter.newsexplorer.students.nomoredomainssbs.ru",
+  baseUrl: "http://localhost:3001",
 };
