@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import './App.css';
-import Header from '../Header/Header';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
 import MainApi from '../../utils/MainApi';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Home from '../Home/Home';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 function App() {
+
+  const navigate = useNavigate();
 
   const [token, setToken] = useState();
 
@@ -19,7 +23,6 @@ function App() {
 
   const [posts, setPosts] = useState([]);
 
-// localStorage.setItem("jwt", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZjN2IwYzI4YTJiZGE3ODliMTM1MzUiLCJpYXQiOjE2Nzc0OTEwMjcsImV4cCI6MTY3ODA5NTgyN30.B_gTT-l_x4R-TGx__HflVrylL8I3vj2dDLa4aXVFRsw");
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
     if (token) {
@@ -33,6 +36,7 @@ function App() {
           else {
             localStorage.removeItem("jwt");
             setIsLoggedIn(false);
+            navigate('/login');
           }
         }).catch((err) => {
           console.log(err);
@@ -43,10 +47,11 @@ function App() {
   useEffect(() => {
     if (token) {
       MainApi.getInitialAppInfo(token)
-        .then(([userInfo, friends, posts]) => {
+        .then(([userInfo,/*  friends, posts */]) => {
           setCurrentUser(userInfo);
-          setFriends(friends);
-          setPosts(posts);
+          /* setFriends(friends);
+          setPosts(posts); */
+          console.log(userInfo);
         })
         .catch((err) => {
           console.log(err);
@@ -54,6 +59,24 @@ function App() {
     }
   }, [token]);
 
+  //login vars and funcs
+
+  const onLogin = (data) => {
+    const { email, password } = data;
+    return MainApi.login(email, password)
+      .then((res) => {
+        localStorage.setItem('jwt', res.token);
+        setToken(res.token);;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const loginProps = {
+    isLoggedIn,
+    onSubmit: onLogin,
+  }
   //choose friends vars anf funcs
 
   const [searchedUsers, setSearchedUsers] = useState([]);
@@ -86,17 +109,23 @@ function App() {
     onSubmit: onAddToWaitingRoom,
   }
 
+
   const mainProps = {
     friends: friends,
     chooseFriendsProps,
   }
+
+  const homeProps = {
+    loginProps: loginProps,
+    mainProps: mainProps,
+  }
   return (
 
     <div className='app'>
-      <Header />
-      <Main
-        mainProps={mainProps} />
-      <Footer />
+      <Routes>
+        <Route path='/' element={<Home homeProps={homeProps} />} />
+        <Route path='/signup' element={<Signup />} />
+      </Routes>
     </div>
   )
 }

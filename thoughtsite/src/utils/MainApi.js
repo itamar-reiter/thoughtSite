@@ -62,7 +62,7 @@ class MainApi {
   }
 
   getInitialAppInfo(token) {
-    return Promise.all([this.getUserInfo(token), this.getPosts(token)]);
+    return Promise.all([this.getUserInfo(token),/*  this.getPosts(token) */]);
   }
 
   getUserInfo(token) {
