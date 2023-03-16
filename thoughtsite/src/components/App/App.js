@@ -124,13 +124,13 @@ function App() {
 
 
   const mainProps = {
-    friends: friends,
+    friends,
     chooseFriendsProps,
   }
 
   const homeProps = {
-    loginProps: loginProps,
-    mainProps: mainProps,
+    loginProps,
+    mainProps,
   }
   return (
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ChooseFriends.css';
 
 function ChooseFriends({ chooseFriendsProps }) {
 
+  const navigate = useNavigate();
   const [user, setUser] = useState('');
   const [awaitingFriends, setAwaitingFriends] = useState([]);
 
