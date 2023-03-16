@@ -87,7 +87,7 @@ class MainApi {
       .then((res) => this._checkResponse(res));
   }
 
-  addFriends(token, friendId) {
+  joinWaitingRoom(token, friendId) {
     return fetch(`${this._baseUrl}/users/${friendId}`, {
       method: "PUT",
       headers: {
@@ -98,16 +98,16 @@ class MainApi {
       .then((res) => this._checkResponse(res));
   }
 
-  handleFriendsList(token, friendId, method) {
+  handleFriendsList(token, friendsIds, method) {
     return fetch(`${this._baseUrl}/users/me/friends`, {
       method: method,
       headers: {
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       },
-      body: {
-        friendId,
-      }
+      body: JSON.stringify({
+        friendsIds,
+      }),
     })
       .then((res) => this._checkResponse(res));
   }

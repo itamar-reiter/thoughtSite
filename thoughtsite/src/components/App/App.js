@@ -23,7 +23,7 @@ function App() {
 
   const [posts, setPosts] = useState([]);
 
-  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZjN2IwYzI4YTJiZGE3ODliMTM1MzUiLCJpYXQiOjE2Nzg4ODIzMjIsImV4cCI6MTY3OTQ4NzEyMn0.DjKs-nxEFvrE7cSy0I1oH15KFWWcSzIyz-s_QaQxasY");
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZjN2IxNzI4YTJiZGE3ODliMTM1MzciLCJpYXQiOjE2Nzg5NjA3OTksImV4cCI6MTY3OTU2NTU5OX0.k3tSQJFOad24Hm4OK2NV7_KkKAIx-Kk9XU6n2uB6PpI");
 
 
   useEffect(() => {
@@ -52,9 +52,10 @@ function App() {
       MainApi.getInitialAppInfo(token)
         .then(([userInfo,/*  friends, posts */]) => {
           setCurrentUser(userInfo);
-          /* setFriends(friends);
-          setPosts(posts); */
+          setFriends(userInfo.friends);
+          // setPosts(posts);
           console.log(userInfo);
+          console.log(friends);
         })
         .catch((err) => {
           console.log(err);
@@ -97,12 +98,13 @@ function App() {
   }
 
   const onAddToFollowList = (users) => {
-    // users.forEach((user) => {
-    // console.log(user);
-    MainApi.addFriends(token, users.map(user => user._id)).then((requestedFriends) => {
-      setFriends(...friends, requestedFriends);
-      console.log(friends);
+    
+    //add friends to the user's friends object 
+    MainApi.handleFriendsList(token, users.map(user => user._id), 'PUT').then((user) => {    
+      setFriends([...friends, ...user.friends]);
     })
+
+    //add the user as a follower to each friend
     // })
   }
 

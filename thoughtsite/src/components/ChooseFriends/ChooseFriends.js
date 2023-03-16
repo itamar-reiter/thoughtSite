@@ -36,13 +36,9 @@ function ChooseFriends({ chooseFriendsProps }) {
     chooseFriendsProps.onSearch(user);
   }
 
-  const handleAddToFollow = (e) => {
-    e.preventDefault();
+  const handleAddToFollow = () => {
     chooseFriendsProps.onSubmit(awaitingFriends);
   }
-
-  /* const handleSave = (e) => {
-  } */
 
   return (
     <section className='choose-friends'>
@@ -78,7 +74,7 @@ function ChooseFriends({ chooseFriendsProps }) {
       <button type='button' onClick={handleAddToFollow}>follow</button>
       <br></br>
       {/* <button type="button"
-      onClick={(e) => {handleSave(e)}}>save</button> */}
+      onClick={onContinueClick}>continue</button> */}
     </section>
   )
 }
