@@ -36,7 +36,7 @@ function ChooseFriends({ chooseFriendsProps }) {
     chooseFriendsProps.onSearch(user);
   }
 
-  const handleAddToWaitingRoom = (e) => {
+  const handleAddToFollow = (e) => {
     e.preventDefault();
     chooseFriendsProps.onSubmit(awaitingFriends);
   }
@@ -61,8 +61,7 @@ function ChooseFriends({ chooseFriendsProps }) {
         />
         <button
           className='choose-friends__submit-button'
-          type='submit'>search</button>
-        <button type='submit' onClick={handleAddToWaitingRoom}>send a request</button>
+          type='submit'>search peoples</button>
       </form>
       <ul className='choose-friends__searched-list'>
         {chooseFriendsProps.searchedUsers.length !== 0 && chooseFriendsProps.searchedUsers.map((user) => {
@@ -73,9 +72,10 @@ function ChooseFriends({ chooseFriendsProps }) {
       <ul className='choose-friends__awaiting-list'>
         {awaitingFriends.length !== 0 && awaitingFriends.map((user) => {
           return <li key={user._id} className='choose-friends__item_type_await'
-            onClick={(e) => onAwaitingUserClick(e, user)}>{user.name}</li>
+          onClick={(e) => onAwaitingUserClick(e, user)}>{user.name}</li>
         })}
       </ul>
+      <button type='button' onClick={handleAddToFollow}>follow</button>
       <br></br>
       {/* <button type="button"
       onClick={(e) => {handleSave(e)}}>save</button> */}

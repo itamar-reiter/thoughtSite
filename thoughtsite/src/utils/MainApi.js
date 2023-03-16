@@ -87,7 +87,7 @@ class MainApi {
       .then((res) => this._checkResponse(res));
   }
 
-  joinWaitingRoom(token, friendId) {
+  addFriends(token, friendId) {
     return fetch(`${this._baseUrl}/users/${friendId}`, {
       method: "PUT",
       headers: {

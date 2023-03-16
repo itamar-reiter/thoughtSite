@@ -17,11 +17,14 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
 
-  const [pendingFriendConfirmations, setPendingFriendConfirmations] = useState([]);
+  // const [pendingFriendConfirmations, setPendingFriendConfirmations] = useState([]);
 
   const [friends, setFriends] = useState([]);
 
   const [posts, setPosts] = useState([]);
+
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZjN2IwYzI4YTJiZGE3ODliMTM1MzUiLCJpYXQiOjE2Nzg4ODIzMjIsImV4cCI6MTY3OTQ4NzEyMn0.DjKs-nxEFvrE7cSy0I1oH15KFWWcSzIyz-s_QaQxasY");
+
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
@@ -93,20 +96,20 @@ function App() {
       })
   }
 
-  const onAddToWaitingRoom = (users) => {
-    users.forEach((user) => {
-      console.log(user);
-      MainApi.joinWaitingRoom(token, user._id).then((requestedFriends) => {
-        setPendingFriendConfirmations(requestedFriends);
-        console.log(pendingFriendConfirmations);
-      })
+  const onAddToFollowList = (users) => {
+    // users.forEach((user) => {
+    // console.log(user);
+    MainApi.addFriends(token, users.map(user => user._id)).then((requestedFriends) => {
+      setFriends(...friends, requestedFriends);
+      console.log(friends);
     })
+    // })
   }
 
   const chooseFriendsProps = {
     searchedUsers,
     onSearch: onChooseFriendsSearch,
-    onSubmit: onAddToWaitingRoom,
+    onSubmit: onAddToFollowList,
   }
 
 
