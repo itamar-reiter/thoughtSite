@@ -5,15 +5,14 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 
-function Home({homeProps}) {
+function Home({ homeProps }) {
   return (
     <div>
       <Header />
       <Routes>
-      <Route path='login' element={!homeProps.loginProps.isLoggedIn && <Login loginProps={homeProps.loginProps} />} />
+        <Route path='main/*' element={<Main mainProps={homeProps.mainProps} />} />
+        <Route path='login/*' element={!homeProps.loginProps.isLoggedIn && <Login loginProps={homeProps.loginProps} />} />
       </Routes>
-      <Main
-        mainProps={homeProps.mainProps} />
       <Footer />
     </div>
   )

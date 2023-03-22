@@ -42,6 +42,10 @@ function ChooseFriends({ chooseFriendsProps }) {
     chooseFriendsProps.onSubmit(awaitingFriends);
   }
 
+  const onContinueClick = () => {
+    navigate('../feed')
+  }
+
   return (
     <section className='choose-friends'>
       <form onSubmit={handleSearch}>
@@ -70,13 +74,13 @@ function ChooseFriends({ chooseFriendsProps }) {
       <ul className='choose-friends__awaiting-list'>
         {awaitingFriends.length !== 0 && awaitingFriends.map((user) => {
           return <li key={user._id} className='choose-friends__item_type_await'
-          onClick={(e) => onAwaitingUserClick(e, user)}>{user.name}</li>
+            onClick={(e) => onAwaitingUserClick(e, user)}>{user.name}</li>
         })}
       </ul>
       <button type='button' onClick={handleAddToFollow}>follow</button>
       <br></br>
-      {/* <button type="button"
-      onClick={onContinueClick}>continue</button> */}
+      <button type="button"
+        onClick={onContinueClick}>continue</button>
     </section>
   )
 }

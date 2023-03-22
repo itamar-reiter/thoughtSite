@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import ChooseFriends from '../ChooseFriends/ChooseFriends';
 import Feed from '../Feed/Feed';
 import MoreInfo from '../MoreInfo/MoreInfo';
@@ -8,14 +9,16 @@ import './Main.css';
 function Main({ mainProps }) {
   return (
     <main className='main'>
-      {mainProps.freinds = [] ?
-        <ChooseFriends
-        chooseFriendsProps={mainProps.chooseFriendsProps} />
-        : <>
-          <Settings />
+      <Settings />
+      <Routes>
+        <Route path='choose-friends/*' element={
+          <ChooseFriends chooseFriendsProps={mainProps.chooseFriendsProps} />
+        } />
+        <Route path='feed/*' element={
           <Feed />
-          <MoreInfo />
-        </>}
+        } />
+      </Routes>
+      <MoreInfo />
     </main>
   )
 }

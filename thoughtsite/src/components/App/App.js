@@ -107,10 +107,10 @@ function App() {
       .then((friends) => {
         friends.forEach(friend => {
           MainApi.joinToFollowers(token, friend)
+            .catch(err => {
+              console.log(err);
+            });
         })
-          .catch(err => {
-            console.log(err);
-          })
       })
       .catch(err => console.log(err));
 
@@ -135,8 +135,9 @@ function App() {
   return (
 
     <div className='app'>
+      <h1> app </h1>
       <Routes>
-        <Route path='/' element={<Home homeProps={homeProps} />} />
+        <Route path='/home/*' element={<Home homeProps={homeProps} />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>
