@@ -113,7 +113,6 @@ function App() {
         })
       })
       .catch(err => console.log(err));
-
   }
 
   const chooseFriendsProps = {
@@ -131,6 +130,10 @@ function App() {
   const homeProps = {
     loginProps,
     mainProps,
+  }
+
+  const onPosting = (post) => {
+    MainApi.savePost(post, token)
   }
   return (
 
