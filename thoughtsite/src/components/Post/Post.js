@@ -13,4 +13,4 @@ function Post(postProps) {
   )
 }
 
-export default Post
+export default Post;

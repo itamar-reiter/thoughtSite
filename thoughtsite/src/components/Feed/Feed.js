@@ -16,8 +16,13 @@ function Feed(feedProps) {
       onChange={feedProps.onSubmit}
       />
       <ul>
-        <Post postProps = {feedProps.postProps} />
-        
+        {
+          feedProps.posts.map(post => {
+            <li>
+            <Post postProps = {post} />
+            </li>
+          })
+        }
       </ul>
     </section>
   )
