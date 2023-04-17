@@ -120,11 +120,20 @@ function App() {
     onSearch: onChooseFriendsSearch,
     onSubmit: onAddToFollowList,
   }
+  
+  const postProps = {
 
+  }
+
+  const feedProps = {
+    onPosting,
+    postProps,
+  }
 
   const mainProps = {
     friends,
     chooseFriendsProps,
+    feedProps,
   }
 
   const homeProps = {
@@ -134,6 +143,9 @@ function App() {
 
   const onPosting = (post) => {
     MainApi.savePost(post, token)
+    .then({
+      
+    })
   }
   return (
 
