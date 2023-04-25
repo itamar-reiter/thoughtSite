@@ -62,7 +62,7 @@ class MainApi {
   }
 
   getInitialAppInfo(token) {
-    return Promise.all([this.getUserInfo(token),/*  this.getPosts(token) */]);
+    return Promise.all([this.getUserInfo(token), this.getPosts(token)]);
   }
 
   getUserInfo(token) {
@@ -125,24 +125,15 @@ class MainApi {
       .then((res) => this._checkResponse(res));
   }
 
-  savePost(data, token) {
-    const {
-      keyword, title, text, date, source, link, image,
-    } = data;
-    return fetch(`${this._baseUrl}/articles`, {
+  createPost(input, userId, token) {
+    return fetch(`${this._baseUrl}/posts/${userId}`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        keyword,
-        title,
-        text,
-        date,
-        source,
-        link,
-        image,
+        input,
       }),
     })
       .then((res) => this._checkResponse(res));

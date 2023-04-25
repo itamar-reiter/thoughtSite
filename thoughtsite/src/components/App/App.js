@@ -21,13 +21,14 @@ function App() {
 
   const [friends, setFriends] = useState([]);
 
-  const [posts, setPosts] = useState([]);
+  const [displayedPosts, setDisplayedPosts] = useState([]);
 
-  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEyZjcyMTkwOWYwNTEzNDYyZWIxY2YiLCJpYXQiOjE2Nzg5NjQ1NTAsImV4cCI6MTY3OTU2OTM1MH0.pCcXAylsu-m1XGIT13WMCZ9c8vcyS7mC_t7pwiBxiEc");
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEyZjcyMTkwOWYwNTEzNDYyZWIxY2YiLCJpYXQiOjE2ODI0MjcyNDIsImV4cCI6MTY4MzAzMjA0Mn0.WR8n-6Qriq1g9EcB6g2DNZVJwyalGWwzOPfyECSTmx4");
 
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
+    console.log(token);
     if (token) {
       MainApi.checkToken(token)
         .then((res) => {
@@ -50,12 +51,13 @@ function App() {
   useEffect(() => {
     if (token) {
       MainApi.getInitialAppInfo(token)
-        .then(([userInfo,/*  friends, posts */]) => {
+        .then(([userInfo,/*  friends,*/ posts ]) => {
           setCurrentUser(userInfo);
           setFriends(userInfo.friends);
-          // setPosts(posts);
+          setDisplayedPosts(posts);
           console.log(userInfo);
           console.log(friends);
+          console.log(displayedPosts);
         })
         .catch((err) => {
           console.log(err);
@@ -115,18 +117,28 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  const onPosting = (input) => {
+    MainApi.createPost(input, currentUser._id, token)
+      .then(post => {
+        setDisplayedPosts([...displayedPosts, post]);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
   const chooseFriendsProps = {
     searchedUsers,
     onSearch: onChooseFriendsSearch,
     onSubmit: onAddToFollowList,
   }
-  
+
   const postProps = {
 
   }
 
   const feedProps = {
-    onPosting,
+    onSubmit: onPosting,
+    posts: displayedPosts,
     postProps,
   }
 
@@ -141,12 +153,6 @@ function App() {
     mainProps,
   }
 
-  const onPosting = (post) => {
-    MainApi.savePost(post, token)
-    .then({
-      
-    })
-  }
   return (
 
     <div className='app'>

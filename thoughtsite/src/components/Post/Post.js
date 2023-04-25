@@ -1,14 +1,14 @@
 import React from 'react';
 import './Post.css';
 
-function Post(postProps) {
+function Post({postProps}) {
   return (
     <div className='post'>
       <div className='post__author-details'>
-        <span className='post__author-name'>{postProps.name}</span>
-        <img className='post__author-image' src={postProps.name} alt='author phot-o'/>
+        <span className='post__author-name'>{postProps.owner}</span>
+        {/* <img className='post__author-image' src={postProps.owner} alt='author phot-o'/> */}
       </div>
-      <p className='post__content'>{postProps.post}</p>
+      <p className='post__content'>{postProps.text}</p>
     </div>
   )
 }

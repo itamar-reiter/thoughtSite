@@ -15,7 +15,7 @@ function Main({ mainProps }) {
           <ChooseFriends chooseFriendsProps={mainProps.chooseFriendsProps} />
         } />
         <Route path='feed/*' element={
-          <Feed />
+          <Feed feedProps={mainProps.feedProps} />
         } />
       </Routes>
       <MoreInfo />
