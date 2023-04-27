@@ -12,7 +12,7 @@ function Feed({feedProps}) {
   }
   return (
     <section className='feed'>
-      <form onSubmit={handleSubmit}>
+      <form className='feed__form' onSubmit={handleSubmit}>
         <input
           className='feed__input'
           required={true}
@@ -27,10 +27,10 @@ function Feed({feedProps}) {
           onCut={handleChange}
           onPaste={handleChange}
         />
-        <button className='feed__submit-button' type='submit'>Post</button>
         <span className='feed__post-error'>{errors.userPostInput}</span>
+        <button className='feed__submit-button' type='submit'>Post</button>
       </form>
-      <ul>
+      <ul className='feed__posts'>
         {feedProps.posts && feedProps.posts.map(post => (
           <li key={post._id}>
             <Post postProps={post} />
