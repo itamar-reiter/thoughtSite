@@ -57,7 +57,7 @@ function App() {
           setDisplayedPosts(posts);
           console.log(userInfo);
           console.log(friends);
-          console.log(displayedPosts);
+          console.log(posts);
         })
         .catch((err) => {
           console.log(err);
