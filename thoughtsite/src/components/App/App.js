@@ -25,7 +25,6 @@ function App() {
 
   // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEyZjcyMTkwOWYwNTEzNDYyZWIxY2YiLCJpYXQiOjE2ODI0MjcyNDIsImV4cCI6MTY4MzAzMjA0Mn0.WR8n-6Qriq1g9EcB6g2DNZVJwyalGWwzOPfyECSTmx4");
 
-
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
     console.log(token);
@@ -51,7 +50,7 @@ function App() {
   useEffect(() => {
     if (token) {
       MainApi.getInitialAppInfo(token)
-        .then(([userInfo,/*  friends,*/ posts ]) => {
+        .then(([userInfo,/*  friends,*/ posts]) => {
           setCurrentUser(userInfo);
           setFriends(userInfo.friends);
           setDisplayedPosts(posts);
@@ -118,7 +117,7 @@ function App() {
   }
 
   const onPosting = (input) => {
-    MainApi.createPost(input, currentUser._id, token)
+    MainApi.createPost(input, token)
       .then(post => {
         setDisplayedPosts([...displayedPosts, post]);
       })
@@ -126,6 +125,18 @@ function App() {
         console.log(err);
       })
   }
+
+  const onComment = (input, postId) => {
+    console.log('insideOnComment');
+    console.log(input, postId);
+    MainApi.addComment(input, postId, token)
+      .then((post) => {
+        setDisplayedPosts(displayedPosts.map(currentPost =>
+          currentPost = currentPost._id === post._id ? post : currentPost));
+      })
+      .catch(err => console.log(err));
+  }
+
   const chooseFriendsProps = {
     searchedUsers,
     onSearch: onChooseFriendsSearch,
@@ -133,6 +144,7 @@ function App() {
   }
 
   const postProps = {
+    onSubmit: onComment,
 
   }
 

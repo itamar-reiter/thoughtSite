@@ -3,12 +3,12 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import Post from '../Post/Post';
 import './Feed.css';
 
-function Feed({feedProps}) {
+function Feed({ feedProps }) {
   const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    return values.userPostInput? feedProps.onSubmit(values.userPostInput) : console.log('no post');
+    return values.userPostInput ? feedProps.onSubmit(values.userPostInput) : console.log('no post');
   }
   return (
     <section className='feed'>
@@ -18,9 +18,9 @@ function Feed({feedProps}) {
           required={true}
           minLength={28}
           placeholder={'What do you think of?'}
-          type="text"
           name="userPostInput"
           id="userPostInput"
+          type="text"
           value={values.userPostInput || ''}
           onChange={handleChange}
           onInput={handleChange}
@@ -33,7 +33,7 @@ function Feed({feedProps}) {
       <ul className='feed__posts'>
         {feedProps.posts && feedProps.posts.map(post => (
           <li key={post._id}>
-            <Post postProps={post} />
+            <Post post={post} onSubmit={feedProps.postProps.onSubmit} />
           </li>
         ))}
       </ul>

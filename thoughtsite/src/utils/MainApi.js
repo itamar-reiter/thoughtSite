@@ -125,8 +125,8 @@ class MainApi {
       .then((res) => this._checkResponse(res));
   }
 
-  createPost(input, userId, token) {
-    return fetch(`${this._baseUrl}/posts/${userId}`, {
+  createPost(input, token) {
+    return fetch(`${this._baseUrl}/posts`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
@@ -137,6 +137,20 @@ class MainApi {
       }),
     })
       .then((res) => this._checkResponse(res));
+  }
+
+  addComment(input, postId, token) {
+    return fetch(`${this._baseUrl}/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        input,
+      })
+    })
+    .then((res) => this._checkResponse(res));
   }
 
   deletePost(cardId, token) {
