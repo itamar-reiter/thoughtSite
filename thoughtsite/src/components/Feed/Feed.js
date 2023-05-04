@@ -3,6 +3,7 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import Post from '../Post/Post';
 import './Feed.css';
 
+
 function Feed({ feedProps }) {
   const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
 
@@ -33,7 +34,7 @@ function Feed({ feedProps }) {
       <ul className='feed__posts'>
         {feedProps.posts && feedProps.posts.map(post => (
           <li key={post._id}>
-            <Post post={post} onSubmit={feedProps.postProps.onSubmit} />
+            <Post post={post} postProps={feedProps.postProps} />
           </li>
         ))}
       </ul>

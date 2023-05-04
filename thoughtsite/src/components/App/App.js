@@ -23,7 +23,7 @@ function App() {
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
-  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEyZjcyMTkwOWYwNTEzNDYyZWIxY2YiLCJpYXQiOjE2ODI0MjcyNDIsImV4cCI6MTY4MzAzMjA0Mn0.WR8n-6Qriq1g9EcB6g2DNZVJwyalGWwzOPfyECSTmx4");
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEyZjcyMTkwOWYwNTEzNDYyZWIxY2YiLCJpYXQiOjE2ODMxMTM0MzgsImV4cCI6MTY4MzcxODIzOH0.Fs2DGLXj5E1eQ7TGySAdPl-G9LvlU_I3AJzxlq26zsU");
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
@@ -54,9 +54,6 @@ function App() {
           setCurrentUser(userInfo);
           setFriends(userInfo.friends);
           setDisplayedPosts(posts);
-          console.log(userInfo);
-          console.log(friends);
-          console.log(posts);
         })
         .catch((err) => {
           console.log(err);
@@ -126,13 +123,29 @@ function App() {
       })
   }
 
+  
+
+  const switchPostsInDisplayedPosts = (post) => {
+    setDisplayedPosts(displayedPosts.map(currentPost =>
+      currentPost = currentPost._id === post._id ? post : currentPost));
+  }
+
   const onComment = (input, postId) => {
     console.log('insideOnComment');
     console.log(input, postId);
     MainApi.addComment(input, postId, token)
       .then((post) => {
-        setDisplayedPosts(displayedPosts.map(currentPost =>
-          currentPost = currentPost._id === post._id ? post : currentPost));
+        console.log(post);
+        switchPostsInDisplayedPosts(post);
+      })
+      .catch(err => console.log(err));
+  }
+
+  const onLikeButtonClick = (postId, isLiked) => {
+    const method = isLiked ? MainApi.putLike : MainApi.removeLike;
+    method(postId, token)
+      .then((post) => {
+        switchPostsInDisplayedPosts(post);
       })
       .catch(err => console.log(err));
   }
@@ -145,6 +158,7 @@ function App() {
 
   const postProps = {
     onSubmit: onComment,
+    onLikeClick: onLikeButtonClick,
 
   }
 
@@ -153,6 +167,7 @@ function App() {
     posts: displayedPosts,
     postProps,
   }
+
 
   const mainProps = {
     friends,
