@@ -23,7 +23,7 @@ function App() {
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
-  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEyZjcyMTkwOWYwNTEzNDYyZWIxY2YiLCJpYXQiOjE2ODMxMTM0MzgsImV4cCI6MTY4MzcxODIzOH0.Fs2DGLXj5E1eQ7TGySAdPl-G9LvlU_I3AJzxlq26zsU");
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODM1NDQyMTQsImV4cCI6MTY4NDE0OTAxNH0.bKKgCIppDy9YNFOPrT3Pnbygl1wzJA-HzhDATh5pHkM");
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
@@ -54,6 +54,7 @@ function App() {
           setCurrentUser(userInfo);
           setFriends(userInfo.friends);
           setDisplayedPosts(posts);
+          console.log(posts);
         })
         .catch((err) => {
           console.log(err);
@@ -142,8 +143,8 @@ function App() {
   }
 
   const onLikeButtonClick = (postId, isLiked) => {
-    const method = isLiked ? MainApi.putLike : MainApi.removeLike;
-    method(postId, token)
+    const method = isLiked ? MainApi.putLike(postId, token) : MainApi.removeLike(postId, token);
+    method
       .then((post) => {
         switchPostsInDisplayedPosts(post);
       })
@@ -158,7 +159,7 @@ function App() {
 
   const postProps = {
     onSubmit: onComment,
-    onLikeClick: onLikeButtonClick,
+    onLikeButtonClick,
 
   }
 

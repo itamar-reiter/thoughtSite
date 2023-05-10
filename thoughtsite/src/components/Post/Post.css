@@ -4,6 +4,11 @@
 
 .post__like-button{
 background-image: url('../../images/Like.svg');
+cursor: pointer;
+background-size: 100%;
+width: 30px;
+height: 26px;
+background-repeat: no-repeat;
 }
 
 .post__like-button_active{

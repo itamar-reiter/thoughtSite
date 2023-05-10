@@ -13,9 +13,8 @@ function Post({ post, postProps }) {
     console.log(post._id);
   }
 
-  const handleLikeButtonClick = (evt) => {
-    evt.preventDefault();
-    postProps.onLikeButtonClick(post._id, post.isLiked);
+  const handleLikeButtonClick = () => {
+    postProps.onLikeButtonClick(post._id, !post.isLiked);
   }
 
   return (
@@ -25,7 +24,7 @@ function Post({ post, postProps }) {
         {/* <img className='post__author-image' src={postProps.owner} alt='author phot-o'/> */}
       </div>
       <p className='post__content'>{post.text}</p>
-      <button className={`post__like-button ${post.isLiked ? 'post__like-button_active' : ''}`}
+      <button className={`post__like-button ${post.isLiked === true ? 'post__like-button_active' : ''}`}
         onClick={handleLikeButtonClick} />
       <div className='comments'>
         <form className='comments__form' onSubmit={handleCommentSubmit}>
