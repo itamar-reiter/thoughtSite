@@ -23,7 +23,7 @@ function App() {
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
-  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODM1NDQyMTQsImV4cCI6MTY4NDE0OTAxNH0.bKKgCIppDy9YNFOPrT3Pnbygl1wzJA-HzhDATh5pHkM");
+  localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODQzMTE5MjcsImV4cCI6MTY4NDkxNjcyN30.695oKOgXWX-_exv9-34hXp18dUKXGw6kBuLgZoQq5o0");
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
