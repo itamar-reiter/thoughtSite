@@ -5,6 +5,9 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from '../Home/Home';
+import Main from '../Main/Main';
+import ChooseFriends from '../ChooseFriends/ChooseFriends';
+import Feed from '../Feed/Feed';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 function App() {
@@ -124,7 +127,7 @@ function App() {
       })
   }
 
-  
+
 
   const switchPostsInDisplayedPosts = (post) => {
     setDisplayedPosts(displayedPosts.map(currentPost =>
@@ -184,9 +187,14 @@ function App() {
   return (
 
     <div className='app'>
-      <h1> app </h1>
       <Routes>
-        <Route path='/home/*' element={<Home homeProps={homeProps} />} />
+        <Route path='/*' element={<Home homeProps={homeProps} />} >
+          <Route path='main' element={<Main mainProps={mainProps} />} >
+            <Route path='choose-friends' element={<ChooseFriends chooseFriendsProps={chooseFriendsProps} />} />
+            <Route path='feed' element={<Feed feedProps={feedProps} />} />
+          </Route>
+          <Route path='login' element={isLoggedIn && <Login loginProps={loginProps} />} />
+        </Route>
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>

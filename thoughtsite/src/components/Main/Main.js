@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import ChooseFriends from '../ChooseFriends/ChooseFriends';
 import Feed from '../Feed/Feed';
 import MoreInfo from '../MoreInfo/MoreInfo';
@@ -10,14 +10,11 @@ function Main({ mainProps }) {
   return (
     <main className='main'>
       <Settings />
-      <Routes>
-        <Route path='choose-friends/*' element={
-          <ChooseFriends chooseFriendsProps={mainProps.chooseFriendsProps} />
-        } />
-        <Route path='feed/*' element={
-          <Feed feedProps={mainProps.feedProps} />
-        } />
-      </Routes>
+        <nav className="main__nav">
+        <Link to="/home/main/choose-friends">choose-friends</Link>
+        <Link to="/home/main/feed">feed</Link>
+      </nav>
+      <Outlet />
       <MoreInfo />
     </main>
   )
