@@ -182,6 +182,7 @@ function App() {
   const homeProps = {
     loginProps,
     mainProps,
+    isLoggedIn,
   }
 
   return (
@@ -193,7 +194,7 @@ function App() {
             <Route path='choose-friends' element={<ChooseFriends chooseFriendsProps={chooseFriendsProps} />} />
             <Route path='feed' element={<Feed feedProps={feedProps} />} />
           </Route>
-          <Route path='login' element={isLoggedIn && <Login loginProps={loginProps} />} />
+          <Route path='login' element={!isLoggedIn && <Login loginProps={loginProps} />} />
         </Route>
         <Route path='/signup' element={<Signup />} />
       </Routes>
