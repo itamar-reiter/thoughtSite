@@ -9,13 +9,13 @@ import { Route, Routes, Link, Outlet } from 'react-router-dom';
 function Home({ homeProps }) {
   return (
     <div className="home">
-      <Header />
+      <Header headerProps={homeProps.headerProps} />
       <nav className="home__nav">
         <Link to="/home/main">main</Link>
         <Link to="/home/login">login</Link>
       </nav>
-      <Outlet className="home__oultlet"/>
-      <Footer />
+      <Outlet className="home__oultlet" />
+      <Footer fotterProps={homeProps.footerProps} />
     </div>
   )
 }

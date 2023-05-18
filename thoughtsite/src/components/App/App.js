@@ -16,7 +16,7 @@ function App() {
 
   const [token, setToken] = useState();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(undefined);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -26,7 +26,9 @@ function App() {
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
-  localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODQzMTE5MjcsImV4cCI6MTY4NDkxNjcyN30.695oKOgXWX-_exv9-34hXp18dUKXGw6kBuLgZoQq5o0");
+  const [switchedNavigationButtons, setSwitchedNavigationButtons] = useState({ first: 'login', second: "FaQ's" });
+
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODQzMTE5MjcsImV4cCI6MTY4NDkxNjcyN30.695oKOgXWX-_exv9-34hXp18dUKXGw6kBuLgZoQq5o0");
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
@@ -37,7 +39,6 @@ function App() {
           if (res) {
             console.log(token);
             setIsLoggedIn(true);
-            console.log(true);
           }
           else {
             localStorage.removeItem("jwt");
@@ -57,6 +58,7 @@ function App() {
           setCurrentUser(userInfo);
           setFriends(userInfo.friends);
           setDisplayedPosts(posts);
+          setSwitchedNavigationButtons({ first: 'me', second: 'logut' });
           console.log(posts);
         })
         .catch((err) => {
@@ -77,6 +79,13 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  const onLogOut = () => {
+    localStorage.removeItem('jwt');
+    setIsLoggedIn(false);
+    setSwitchedNavigationButtons({ first: 'login', second: "FaQ's" });
+    navigate('/');
   }
 
   const loginProps = {
@@ -166,6 +175,17 @@ function App() {
 
   }
 
+  const headerProps = {
+    isLoggedIn,
+    currentUser,
+    switchedNavigationButtons,
+  }
+
+  const footerProps = {
+    isLoggedIn,
+    currentUser,
+  }
+
   const feedProps = {
     onSubmit: onPosting,
     posts: displayedPosts,
@@ -183,6 +203,8 @@ function App() {
     loginProps,
     mainProps,
     isLoggedIn,
+    headerProps,
+    footerProps,
   }
 
   return (
@@ -195,6 +217,7 @@ function App() {
             <Route path='feed' element={<Feed feedProps={feedProps} />} />
           </Route>
           <Route path='login' element={!isLoggedIn && <Login loginProps={loginProps} />} />
+
         </Route>
         <Route path='/signup' element={<Signup />} />
       </Routes>

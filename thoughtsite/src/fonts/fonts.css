@@ -1,0 +1,14 @@
+ @font-face {
+  font-family: 'Inter';
+  src: url('./Inter/Inter-VariableFont_slnt\,wght.ttf');
+ }
+
+ @font-face {
+  font-family: 'Typographica';
+  src: url('./logo-typographica/Typographica-Blp5.ttf');
+ }
+
+ @font-face {
+  font-family: 'MarvelRegular';
+  src: url('./logo-marvel/MarvelRegular-Dj83.ttf');
+ }

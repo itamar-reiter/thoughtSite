@@ -2,11 +2,11 @@ import React from 'react';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
-function Header() {
+function Header({headerProps}) {
   return (
     <header className='header'>
-      <h1 className='header__logo'>Thought Site</h1>
-      <Navigation/>
+      <h1 className='header__logo'>ThoughtSite</h1>
+      <Navigation navigationProps={headerProps}/>
     </header>
   )
 }
