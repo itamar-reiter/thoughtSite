@@ -7,6 +7,11 @@ function Header({headerProps}) {
     <header className='header'>
       <h1 className='header__logo'>ThoughtSite</h1>
       <Navigation navigationProps={headerProps}/>
+      <div className='mobile-navigator'>
+        <div className='mobile-navigator__line'/>
+        <div className='mobile-navigator__line'/>
+        <div className='mobile-navigator__line'/>
+      </div>
     </header>
   )
 }

@@ -6,7 +6,7 @@
   margin: 0;
   padding: 0;
   flex-grow: 0;
-}
+} 
 
 .navigation__links {
   display: flex;
@@ -80,6 +80,12 @@
   color: rgba(99, 102, 241, 0.9);
 }
 
-.navigation__button_number_1:hover{
+.navigation__button_number_1:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 1000px) {
+  .navigation{
+    display: none;
+  }
 }

@@ -7,7 +7,7 @@ function Navigation({ navigationProps }) {
   
 
   return (
-    <nav className='navigation'>
+    <nav className={`navigation navigation_type`}>
       <div className='navigation__links'>
         <Link to='/' className='navigation__link'>Home</Link>
         <Link to='/search' className='navigation__link'>search</Link>
