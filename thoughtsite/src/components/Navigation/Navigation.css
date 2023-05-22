@@ -87,5 +87,41 @@
 @media (max-width: 1000px) {
   .navigation{
     display: none;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 72px;
+    right: 0;
+    background-color: #404040;
+    border-radius: 6px;
+  }
+
+  .navigation__links{
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+
+  .navigation__link{
+    height: 40px;
+    width: 100%;
+    color: #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+
+  .navigation__buttons{
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navigation_tablet_active{
+    display: flex;
   }
 }

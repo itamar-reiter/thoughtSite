@@ -28,6 +28,13 @@ function App() {
 
   const [switchedNavigationButtons, setSwitchedNavigationButtons] = useState({ first: 'login', second: "FaQ's" });
 
+  const [isNavigationHumburgerClicked, setIsNavigationHumburgerClicked] = useState(false);
+  
+  
+  function toggleIsNavigationHumburgerClicked() {
+    setIsNavigationHumburgerClicked(!isNavigationHumburgerClicked);
+  }
+
   // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODQzMTE5MjcsImV4cCI6MTY4NDkxNjcyN30.695oKOgXWX-_exv9-34hXp18dUKXGw6kBuLgZoQq5o0");
 
   useEffect(() => {
@@ -179,6 +186,8 @@ function App() {
     isLoggedIn,
     currentUser,
     switchedNavigationButtons,
+    onHumburgerClick: toggleIsNavigationHumburgerClicked,
+    humburgerButtonClicked: isNavigationHumburgerClicked,
   }
 
   const footerProps = {
