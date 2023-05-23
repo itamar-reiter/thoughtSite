@@ -11,8 +11,8 @@ function Main({ mainProps }) {
     <main className='main'>
       <Settings />
         <nav className="main__nav">
-        <Link to="/main/choose-friends">choose-friends</Link>
-        <Link to="/main/feed">feed</Link>
+        <Link to="/main/choose-friends"></Link>
+        <Link to="/main/feed"></Link>
       </nav>
       <Outlet />
       <MoreInfo />

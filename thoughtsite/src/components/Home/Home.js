@@ -11,7 +11,7 @@ function Home({ homeProps }) {
     <div className="home">
       <Header headerProps={homeProps.headerProps} />
       <nav className="home__nav">
-        <Link to="/main">main</Link>
+        <Link to="/main"></Link>
       </nav>
       <Outlet className="home__oultlet" />
       <Footer footerProps={homeProps.footerProps} />

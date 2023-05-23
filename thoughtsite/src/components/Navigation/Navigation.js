@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import './Navigation.css';
 import { Link } from "react-router-dom";
 
-function Navigation({ navigationProps }) {
-
-
+function Navigation({ navigationProps }) { 
 
   return (
     <nav className={`navigation ${navigationProps.humburgerButtonClicked ? 'navigation_tablet_active' : ''}`}>
       <div className='navigation__links'>
-        <Link to='/' className='navigation__link'>Home</Link>
-        <Link to='/search' className='navigation__link'>search</Link>
-        <Link to='/friends' className='navigation__link'>friends</Link>
-        <Link to='/notfications' className='navigation__link'>notfications</Link>
+        <Link to='/main/feed' className='navigation__link'>Home</Link>
+        <Link to='/main/choose-friends' className='navigation__link'>search</Link>
+        <Link to='/friends' className='navigation__link'>*friends*</Link>
+        <Link to='/notfications' className='navigation__link'>*notfications*</Link>
       </div>
       <div className='navigation__buttons'>
         <Link to={`/${navigationProps.switchedNavigationButtons.first}`} className='navigation__button navigation__button_number_0'>{navigationProps.switchedNavigationButtons.first}</Link>
