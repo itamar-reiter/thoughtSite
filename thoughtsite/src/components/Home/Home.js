@@ -11,11 +11,10 @@ function Home({ homeProps }) {
     <div className="home">
       <Header headerProps={homeProps.headerProps} />
       <nav className="home__nav">
-        <Link to="/home/main">main</Link>
-        <Link to="/home/login">login</Link>
+        <Link to="/main">main</Link>
       </nav>
       <Outlet className="home__oultlet" />
-      <Footer fotterProps={homeProps.footerProps} />
+      <Footer footerProps={homeProps.footerProps} />
     </div>
   )
 }

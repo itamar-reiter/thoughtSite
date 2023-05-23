@@ -35,7 +35,7 @@ function App() {
     setIsNavigationHumburgerClicked(!isNavigationHumburgerClicked);
   }
 
-  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODQzMTE5MjcsImV4cCI6MTY4NDkxNjcyN30.695oKOgXWX-_exv9-34hXp18dUKXGw6kBuLgZoQq5o0");
+  // localStorage.setItem('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4ZDVkZmQ4NDQyMWIyYzQyYWY4ZjAiLCJpYXQiOjE2ODQ4MzYzMDksImV4cCI6MTY4NTQ0MTEwOX0.jCzNI5tIIrmOlslBOGuwAL1TPtm2Y3hoOcIhKnk7IyI");
 
   useEffect(() => {
     setToken(localStorage.getItem("jwt"));
