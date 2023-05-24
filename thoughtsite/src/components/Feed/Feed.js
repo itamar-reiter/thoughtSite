@@ -2,10 +2,11 @@ import React from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import Post from '../Post/Post';
 import './Feed.css';
+import { TextField, Button, CssBaseline, Paper } from '@mui/material';
 
 
 function Feed({ feedProps }) {
-  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
+  const { values, valuesLength, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -13,31 +14,32 @@ function Feed({ feedProps }) {
   }
   return (
     <section className='feed'>
-      <form className='feed__form' onSubmit={handleSubmit}>
-        <input
-          className='feed__input'
-          required={true}
-          minLength={28}
-          placeholder={'What do you think of?'}
-          name="userPostInput"
-          id="userPostInput"
-          type="text"
-          value={values.userPostInput || ''}
-          onChange={handleChange}
-          onInput={handleChange}
-          onCut={handleChange}
-          onPaste={handleChange}
-        />
-        <span className='feed__post-error'>{errors.userPostInput}</span>
-        <button className='feed__submit-button' type='submit'>Post</button>
-      </form>
-      <ul className='feed__posts'>
-        {feedProps.posts && feedProps.posts.map(post => (
-          <li key={post._id}>
-            <Post post={post} postProps={feedProps.postProps} />
-          </li>
-        ))}
-      </ul>
+      <Paper elevation={3} sx={{ p: '10px' }}>
+        <form className='feed__form' onSubmit={handleSubmit}>
+          <TextField
+            required={true}
+            placeholder={'What do you think of?'}
+            name="userPostInput"
+            id="userPostInput"
+            type="text"
+            value={values.userPostInput || ''}
+            onChange={handleChange}
+            color={errors.userPostInput ? 'error' : 'primary'}
+            inputProps={{ minLength: 28 }}
+            size='small'
+            sx={{ w: '100%' }}
+          />
+          {valuesLength.userPostInput < 28 ? <span className='feed__post-counter'>{valuesLength.userPostInput}/28</span> : <CssBaseline />}
+          <Button type='submit' variant='contained' disabled={!isValid}>Post</Button>
+        </form>
+        <ul className='feed__posts'>
+          {feedProps.posts && feedProps.posts.map(post => (
+            <li key={post._id}>
+              <Post post={post} postProps={feedProps.postProps} />
+            </li>
+          ))}
+        </ul>
+      </Paper>
     </section>
   )
 }
